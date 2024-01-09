@@ -70,6 +70,7 @@ ul {
 .main-nav-list a:hover,
 .main-nav-list a.active {
   color: var(--color-primary-800);
+  text-decoration: underline;
 }
 
 .event-form-form {
