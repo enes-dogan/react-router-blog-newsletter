@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { EventTypes } from '../types.ts';
 
 export default function EventsList({ events }: { events: EventTypes[] }) {
@@ -7,13 +8,13 @@ export default function EventsList({ events }: { events: EventTypes[] }) {
       <ul className="events-list-list">
         {events.map(event => (
           <li key={event.id} className="events-list-item">
-            <a href="...">
+            <Link to={event.id}>
               <img src={event.image} alt={event.title} />
               <div className="events-list-content">
                 <h2>{event.title}</h2>
                 <time>{event.date}</time>
               </div>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

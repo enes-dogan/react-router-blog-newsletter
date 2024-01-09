@@ -16,7 +16,7 @@ export default function MainNavigation() {
           </li>
           <li>
             <NavLink
-              to="events"
+              to="/events"
               className={({ isActive }) => (isActive ? 'active' : '')}
               end
             >
