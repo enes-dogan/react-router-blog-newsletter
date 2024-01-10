@@ -5,7 +5,7 @@ import EventsRootLayout from './pages/EventsRoot.tsx';
 import HomePage from './pages/Home.tsx';
 import EditEventPage from './pages/EditEvent.tsx';
 import EventDetailPage from './pages/EventDetail.tsx';
-import EventsPage from './pages/Events.tsx';
+import EventsPage, { loader as eventsLoader } from './pages/Events.tsx';
 import NewEventPage from './pages/NewEvent.tsx';
 
 const router = createBrowserRouter([
@@ -18,7 +18,11 @@ const router = createBrowserRouter([
         path: 'events',
         element: <EventsRootLayout />,
         children: [
-          { index: true, element: <EventsPage /> },
+          {
+            index: true,
+            element: <EventsPage />,
+            loader: eventsLoader,
+          },
           { path: 'new', element: <NewEventPage /> },
           { path: ':id', element: <EventDetailPage /> },
           { path: ':id/edit', element: <EditEventPage /> },
