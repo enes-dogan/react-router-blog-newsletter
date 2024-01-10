@@ -7,11 +7,13 @@ import EditEventPage from './pages/EditEvent.tsx';
 import EventDetailPage from './pages/EventDetail.tsx';
 import EventsPage, { loader as eventsLoader } from './pages/Events.tsx';
 import NewEventPage from './pages/NewEvent.tsx';
+import ErrorPage from './pages/Error.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
       {

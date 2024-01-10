@@ -11,8 +11,7 @@ export interface EventFormProps {
   event: React.FormEvent<HTMLFormElement>;
 }
 
-export interface EventListLoaderReturnType {
-  events: EventTypes[];
-  isError?: boolean;
-  message?: string;
+export interface PageContentProps {
+  title: string;
+  children: React.ReactNode;
 }
