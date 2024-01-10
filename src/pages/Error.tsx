@@ -6,15 +6,14 @@ import PageContent from '../components/PageContent.tsx';
 export default function ErrorPage() {
   const error = useRouteError() as {
     status: number;
-    data: string;
+    data: { message: string };
   };
 
   let title = 'An error occured';
   let message = 'Something went wrong!';
 
   if (error.status === 500) {
-    const parsedErrorData = JSON.parse(error.data) as { message: string };
-    message = parsedErrorData.message;
+    message = error.data.message;
   }
 
   if (error.status === 404) {

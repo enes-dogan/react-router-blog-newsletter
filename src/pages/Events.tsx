@@ -14,19 +14,16 @@ export default function EventsPage() {
 }
 
 export async function loader() {
-  const response = await fetch('http://localhost:8080/eventss');
+  const response = await fetch('http://localhost:8080/events');
 
   if (!response.ok) {
-    throw new Response(JSON.stringify({ message: 'Could not load events.' }), {
-      status: 500,
-    });
-    // throw json(
-    //   { message: 'Could not load events.' },
-    //   {
-    //     status: 500,
-    //   }
-    // ); // react-router-dom handle throw and use its Response in errorElement component
+    throw json(
+      { message: 'Could not load events.' },
+      {
+        status: 500,
+      }
+    );
   } else {
-    return response; // react-router-dom package can handle Response objects.
+    return response;
   }
 }
