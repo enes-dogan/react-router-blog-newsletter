@@ -10,3 +10,9 @@ export interface EventFormProps {
   method: string;
   event: React.FormEvent<HTMLFormElement>;
 }
+
+export interface EventListLoaderReturnType {
+  events: EventTypes[];
+  isError?: boolean;
+  message?: string;
+}
