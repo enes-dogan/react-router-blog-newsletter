@@ -6,9 +6,7 @@ export default function EventsRootLayout() {
   return (
     <>
       <EventsNavigation />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
     </>
   );
 }

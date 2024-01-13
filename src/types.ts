@@ -15,3 +15,9 @@ export interface PageContentProps {
   title: string;
   children: React.ReactNode;
 }
+
+import { Params } from 'react-router-dom';
+export interface EventDetailLoaderParams {
+  request: unknown;
+  params: Params<string>;
+}

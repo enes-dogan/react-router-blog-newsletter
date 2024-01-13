@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { EventTypes } from '../types.ts';
 
 export default function EventItem({ event }: { event: EventTypes }) {
@@ -12,7 +14,7 @@ export default function EventItem({ event }: { event: EventTypes }) {
       <time>{event.date}</time>
       <p>{event.description}</p>
       <menu className="event-item-actions">
-        <a href="edit">Edit</a>
+        <Link to="edit">Edit</Link>
         <button onClick={startDeleteHandler}>Delete</button>
       </menu>
     </article>

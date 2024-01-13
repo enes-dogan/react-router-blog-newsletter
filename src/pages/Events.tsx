@@ -6,13 +6,10 @@ import EventsList from '../components/EventsList.tsx';
 export default function EventsPage() {
   const data = useLoaderData() as { events: EventTypes[] };
 
-  return (
-    <>
-      <EventsList events={data.events} />
-    </>
-  );
+  return <EventsList events={data.events} />;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
   const response = await fetch('http://localhost:8080/events');
 
