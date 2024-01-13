@@ -8,7 +8,7 @@ export interface EventTypes {
 
 export interface EventFormProps {
   method: string;
-  event: React.FormEvent<HTMLFormElement>;
+  event: EventTypes;
 }
 
 export interface PageContentProps {

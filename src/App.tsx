@@ -29,11 +29,19 @@ const router = createBrowserRouter([
           },
           {
             path: ':eventId',
-            element: <EventDetailPage />,
-            loader: ({ params }) =>
-              fetch(`http://localhost:8080/events/${params.eventId!}`),
+            id: 'event-detail',
+            loader: eventDetailLoader,
+            children: [
+              {
+                index: true,
+                element: <EventDetailPage />,
+              },
+              {
+                path: 'edit',
+                element: <EditEventPage />,
+              },
+            ],
           },
-          { path: ':id/edit', element: <EditEventPage /> },
           { path: 'new', element: <NewEventPage /> },
         ],
       },
