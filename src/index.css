@@ -214,3 +214,7 @@ ul {
   border: none;
   color: var(--color-primary-800);
 }
+
+.error {
+  color: var(--color-primary-900);
+}

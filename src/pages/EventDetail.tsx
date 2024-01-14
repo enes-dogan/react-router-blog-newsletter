@@ -12,6 +12,7 @@ export default function EventDetailPage() {
 
   return <EventItem event={data.event} />;
 }
+
 /* eslint-disable react-refresh/only-export-components */
 export async function loader({ params }: EventDetailLoaderParams) {
   const id = params.eventId!;

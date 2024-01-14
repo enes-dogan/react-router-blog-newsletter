@@ -10,6 +10,7 @@ export interface EventTypes {
 export interface EventFormProps {
   method?: string;
   event?: EventTypes;
+  error: deleteEventActionError | undefined;
 }
 
 export interface PageContentProps {
@@ -34,4 +35,9 @@ export interface DeleteEventActionParams {
     method: string;
   };
   params: Params<string>;
+}
+
+export interface deleteEventActionError {
+  message: string;
+  errors: EventTypes;
 }

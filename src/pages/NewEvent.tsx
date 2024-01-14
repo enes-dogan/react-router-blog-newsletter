@@ -1,10 +1,14 @@
-import { json, redirect } from 'react-router-dom';
-import { NewEventLoaderActionParams } from '../types.ts';
+import { json, redirect, useActionData } from 'react-router-dom';
+import {
+  NewEventLoaderActionParams,
+  deleteEventActionError,
+} from '../types.ts';
 
 import EventForm from '../components/EventForm.tsx';
 
 export default function NewEventPage() {
-  return <EventForm />;
+  const response = useActionData() as deleteEventActionError;
+  return <EventForm error={response} />;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -25,6 +29,10 @@ export async function action({ request }: NewEventLoaderActionParams) {
     },
     body: JSON.stringify(eventData),
   });
+
+  if (response.status === 422) {
+    return response;
+  }
 
   if (!response.ok) {
     throw json({ message: 'Could not save event' }, { status: 500 });
