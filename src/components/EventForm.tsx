@@ -1,11 +1,15 @@
-import { Form, useNavigate, useNavigation } from 'react-router-dom';
-import { EventFormProps } from '../types.ts';
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from 'react-router-dom';
+import { EventFormProps, deleteEventInputError } from '../types.ts';
 
-export default function EventForm({ event, error }: EventFormProps) {
+export default function EventForm({ event }: EventFormProps) {
   const navigate = useNavigate();
   const navigation = useNavigation();
-
-  console.log(error);
+  const response = useActionData() as deleteEventInputError;
 
   const isSubmitting = navigation.state === 'submitting';
 
@@ -34,18 +38,18 @@ export default function EventForm({ event, error }: EventFormProps) {
     description: false,
   };
 
-  if (error?.message) {
-    hasError.title = error.errors.title ? true : false;
-    hasError.image = error.errors.image ? true : false;
-    hasError.date = error.errors.date ? true : false;
-    hasError.description = error.errors.description ? true : false;
+  if (response.message) {
+    hasError.title = response.errors.title ? true : false;
+    hasError.image = response.errors.image ? true : false;
+    hasError.date = response.errors.date ? true : false;
+    hasError.description = response.errors.description ? true : false;
   }
 
   return (
     <Form method="POST" className="event-form-form">
       <p>
         <label className={hasError.title ? 'error' : ''} htmlFor="title">
-          {hasError.title ? error?.errors.title : 'Title'}
+          {hasError.title ? response?.errors.title : 'Title'}
         </label>
         <input
           id="title"
@@ -57,7 +61,7 @@ export default function EventForm({ event, error }: EventFormProps) {
       </p>
       <p>
         <label className={hasError.image ? 'error' : ''} htmlFor="image">
-          {hasError.image ? error?.errors.image : 'Image'}
+          {hasError.image ? response?.errors.image : 'Image'}
         </label>
         <input
           id="image"
@@ -69,7 +73,7 @@ export default function EventForm({ event, error }: EventFormProps) {
       </p>
       <p>
         <label className={hasError.date ? 'error' : ''} htmlFor="date">
-          {hasError.date ? error?.errors.date : 'Date'}
+          {hasError.date ? response?.errors.date : 'Date'}
         </label>
         <input
           id="date"
@@ -84,7 +88,7 @@ export default function EventForm({ event, error }: EventFormProps) {
           className={hasError.description ? 'error' : ''}
           htmlFor="description"
         >
-          {hasError.description ? error?.errors.description : 'Description'}
+          {hasError.description ? response?.errors.description : 'Description'}
         </label>
         <textarea
           id="description"
@@ -95,7 +99,9 @@ export default function EventForm({ event, error }: EventFormProps) {
         />
       </p>
       <div className="event-form-actions">
-        <p className="error">{error?.message && error.message}</p>
+        <p className="error">
+          {response?.message && !isSubmitting && response.message}
+        </p>
         <button type="button" onClick={cancelHandler}>
           Cancel
         </button>

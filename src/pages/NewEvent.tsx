@@ -1,14 +1,10 @@
-import { json, redirect, useActionData } from 'react-router-dom';
-import {
-  NewEventLoaderActionParams,
-  deleteEventActionError,
-} from '../types.ts';
+import { json, redirect } from 'react-router-dom';
+import { NewEventLoaderActionParams } from '../types.ts';
 
 import EventForm from '../components/EventForm.tsx';
 
 export default function NewEventPage() {
-  const response = useActionData() as deleteEventActionError;
-  return <EventForm error={response} />;
+  return <EventForm />;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -22,6 +18,7 @@ export async function action({ request }: NewEventLoaderActionParams) {
     description: data.get('description'),
   };
 
+  // eslint-disable-next-line react-refresh/only-export-components
   const response = await fetch('http://localhost:8080/events', {
     method: 'POST',
     headers: {
