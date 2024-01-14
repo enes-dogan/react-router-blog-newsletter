@@ -28,3 +28,10 @@ interface ActionFunctionArgs<T> {
   };
 }
 export type NewEventLoaderActionParams = ActionFunctionArgs<FormData>;
+
+export interface DeleteEventActionParams {
+  request: {
+    method: string;
+  };
+  params: Params<string>;
+}

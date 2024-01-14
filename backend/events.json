@@ -1,13 +1,6 @@
 {
   "events": [
     {
-      "title": "TEST EVENT",
-      "image": "https://blog.hubspot.de/hs-fs/hubfs/Germany/Blog_images/youtube-statistiken.png?width=610&height=406&name=youtube-statistiken.png ",
-      "date": "2024-05-04",
-      "description": " To avoid TypeScript type errors when passing functions as parameters or assigning them to variables, you need to ensure that the function types are compatible. In TypeScript, function types can be specified by defining the parameter types and the return type of the function.\\nHere's how you can define a function type in TypeScript     ",
-      "id": "9441a895-71d9-4aec-a788-0010f965246f"
-    },
-    {
       "title": "A dummy event",
       "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
       "date": "2023-02-26",

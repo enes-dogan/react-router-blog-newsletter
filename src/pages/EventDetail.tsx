@@ -1,5 +1,9 @@
-import { useRouteLoaderData, json } from 'react-router-dom';
-import { EventDetailLoaderParams, EventTypes } from '../types.ts';
+import { useRouteLoaderData, json, redirect } from 'react-router-dom';
+import {
+  EventTypes,
+  EventDetailLoaderParams,
+  DeleteEventActionParams,
+} from '../types.ts';
 
 import EventItem from '../components/EventItem.tsx';
 
@@ -8,8 +12,7 @@ export default function EventDetailPage() {
 
   return <EventItem event={data.event} />;
 }
-
-// eslint-disable-next-line react-refresh/only-export-components
+/* eslint-disable react-refresh/only-export-components */
 export async function loader({ params }: EventDetailLoaderParams) {
   const id = params.eventId!;
 
@@ -23,4 +26,18 @@ export async function loader({ params }: EventDetailLoaderParams) {
   } else {
     return response;
   }
+}
+
+export async function action({ request, params }: DeleteEventActionParams) {
+  const id = params.eventId!;
+
+  const response = await fetch(`http://localhost:8080/events/${id}`, {
+    method: request.method,
+  });
+
+  if (!response.ok) {
+    throw json({ message: 'Could not delete selected event' }, { status: 500 });
+  }
+
+  return redirect('/events');
 }

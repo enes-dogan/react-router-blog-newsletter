@@ -1,10 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useSubmit } from 'react-router-dom';
 
 import { EventTypes } from '../types.ts';
 
 export default function EventItem({ event }: { event: EventTypes }) {
+  const submit = useSubmit();
+
   function startDeleteHandler() {
-    // ...
+    const proceed = window.confirm('Are you sure?');
+
+    if (proceed) {
+      submit(null, { method: 'DELETE' });
+    }
   }
 
   return (
