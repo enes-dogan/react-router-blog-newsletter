@@ -1,15 +1,14 @@
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import { EventFormProps } from '../types.ts';
 
-export default function EventForm({ method, event }: EventFormProps) {
+export default function EventForm({ event }: EventFormProps) {
   const navigate = useNavigate();
+
   function cancelHandler() {
     navigate('..');
-    console.log(method, event);
   }
-
   return (
-    <form className="event-form-form">
+    <Form method="POST" className="event-form-form">
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -56,6 +55,6 @@ export default function EventForm({ method, event }: EventFormProps) {
         </button>
         <button>Save</button>
       </div>
-    </form>
+    </Form>
   );
 }

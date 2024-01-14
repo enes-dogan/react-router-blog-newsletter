@@ -8,7 +8,7 @@ import EventDetailPage, {
   loader as eventDetailLoader,
 } from './pages/EventDetail.tsx';
 import EventsPage, { loader as eventsLoader } from './pages/Events.tsx';
-import NewEventPage from './pages/NewEvent.tsx';
+import NewEventPage, { action as newEventAction } from './pages/NewEvent.tsx';
 import ErrorPage from './pages/Error.tsx';
 
 const router = createBrowserRouter([
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
               },
             ],
           },
-          { path: 'new', element: <NewEventPage /> },
+          { path: 'new', element: <NewEventPage />, action: newEventAction },
         ],
       },
     ],

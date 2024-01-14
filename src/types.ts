@@ -1,4 +1,5 @@
 export interface EventTypes {
+  get(arg0: string): unknown;
   title: string;
   image: string;
   date: string;
@@ -7,8 +8,8 @@ export interface EventTypes {
 }
 
 export interface EventFormProps {
-  method: string;
-  event: EventTypes;
+  method?: string;
+  event?: EventTypes;
 }
 
 export interface PageContentProps {
@@ -18,6 +19,12 @@ export interface PageContentProps {
 
 import { Params } from 'react-router-dom';
 export interface EventDetailLoaderParams {
-  request: unknown;
   params: Params<string>;
 }
+
+interface ActionFunctionArgs<T> {
+  request: {
+    formData: () => Promise<T>;
+  };
+}
+export type NewEventLoaderActionParams = ActionFunctionArgs<FormData>;
