@@ -6,5 +6,5 @@ import EventForm from '../components/EventForm.tsx';
 export default function EditEventPage() {
   const data = useRouteLoaderData('event-detail') as { event: EventTypes };
 
-  return <EventForm event={data.event} />;
+  return <EventForm event={data.event} method="PATCH" />;
 }

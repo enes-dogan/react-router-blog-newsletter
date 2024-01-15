@@ -1,12 +1,12 @@
 import {
   Form,
-  useActionData,
   useNavigate,
   useNavigation,
+  useActionData,
 } from 'react-router-dom';
 import { EventFormProps, deleteEventInputError } from '../types.ts';
 
-export default function EventForm({ event }: EventFormProps) {
+export default function EventForm({ method, event }: EventFormProps) {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const response = useActionData() as deleteEventInputError;
@@ -17,92 +17,59 @@ export default function EventForm({ event }: EventFormProps) {
     navigate('..');
   }
 
-  const defaultValues = {
-    title: '',
-    image: '',
-    date: '',
-    description: '',
-  };
-
-  if (event) {
-    defaultValues.title = event.title;
-    defaultValues.image = event.image;
-    defaultValues.date = event.date;
-    defaultValues.description = event.description;
-  }
-
-  const hasError = {
-    title: false,
-    image: false,
-    date: false,
-    description: false,
-  };
-
-  if (response.message) {
-    hasError.title = response.errors.title ? true : false;
-    hasError.image = response.errors.image ? true : false;
-    hasError.date = response.errors.date ? true : false;
-    hasError.description = response.errors.description ? true : false;
-  }
-
   return (
-    <Form method="POST" className="event-form-form">
+    <Form method={method} className="event-form-form">
+      {response && response.errors && (
+        <ul>
+          {Object.values(response.errors).map((err: string) => (
+            <li key={err} className="error">
+              {err}
+            </li>
+          ))}
+        </ul>
+      )}
       <p>
-        <label className={hasError.title ? 'error' : ''} htmlFor="title">
-          {hasError.title ? response?.errors.title : 'Title'}
-        </label>
+        <label htmlFor="title">Title</label>
         <input
           id="title"
           type="text"
           name="title"
           required
-          defaultValue={defaultValues.title}
+          defaultValue={event ? event.title : ''}
         />
       </p>
       <p>
-        <label className={hasError.image ? 'error' : ''} htmlFor="image">
-          {hasError.image ? response?.errors.image : 'Image'}
-        </label>
+        <label htmlFor="image">Image</label>
         <input
           id="image"
           type="url"
           name="image"
           required
-          defaultValue={defaultValues.image}
+          defaultValue={event ? event.image : ''}
         />
       </p>
       <p>
-        <label className={hasError.date ? 'error' : ''} htmlFor="date">
-          {hasError.date ? response?.errors.date : 'Date'}
-        </label>
+        <label htmlFor="date">Date</label>
         <input
           id="date"
           type="date"
           name="date"
           required
-          defaultValue={defaultValues.date}
+          defaultValue={event ? event.date : ''}
         />
       </p>
       <p>
-        <label
-          className={hasError.description ? 'error' : ''}
-          htmlFor="description"
-        >
-          {hasError.description ? response?.errors.description : 'Description'}
-        </label>
+        <label htmlFor="description">Description</label>
         <textarea
           id="description"
           name="description"
           rows={5}
           required
-          defaultValue={defaultValues.description}
+          defaultValue={event ? event.description : ''}
         />
       </p>
       <div className="event-form-actions">
-        <p className="error">
-          {response?.message && !isSubmitting && response.message}
-        </p>
-        <button type="button" onClick={cancelHandler}>
+        <button type="button" onClick={cancelHandler} disabled={isSubmitting}>
           Cancel
         </button>
         <button disabled={isSubmitting}>

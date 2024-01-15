@@ -21,7 +21,7 @@ export async function loader({ params }: EventDetailLoaderParams) {
 
   if (!response.ok) {
     throw json(
-      { message: 'Could not load details of selected event' },
+      { message: 'Could not load the details for selected event.' },
       { status: 500 }
     );
   } else {

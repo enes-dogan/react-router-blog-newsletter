@@ -1,3 +1,5 @@
+import { ActionFunction, Params } from 'react-router-dom';
+
 export interface EventTypes {
   get(arg0: string): unknown;
   title: string;
@@ -8,6 +10,7 @@ export interface EventTypes {
 }
 
 export interface EventFormProps {
+  method: 'POST' | 'PATCH';
   event?: EventTypes;
 }
 
@@ -16,17 +19,18 @@ export interface PageContentProps {
   children: React.ReactNode;
 }
 
-import { Params } from 'react-router-dom';
 export interface EventDetailLoaderParams {
   params: Params<string>;
 }
 
-interface ActionFunctionArgs<T> {
+export type formEventActionFn = ActionFunction<formEventActionParams>;
+interface formEventActionParams {
   request: {
-    formData: () => Promise<T>;
+    method: string;
+    formData: () => Promise<EventTypes>;
   };
+  params: Params<string>;
 }
-export type NewEventLoaderActionParams = ActionFunctionArgs<FormData>;
 
 export interface DeleteEventActionParams {
   request: {

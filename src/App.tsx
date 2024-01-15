@@ -1,16 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import RootLayout from './pages/Root.tsx';
-import EventsRootLayout from './pages/EventsRoot.tsx';
-import HomePage from './pages/Home.tsx';
-import EditEventPage from './pages/EditEvent.tsx';
-import EventDetailPage, {
-  loader as eventDetailLoader,
-  action as deleteEventAction,
-} from './pages/EventDetail.tsx';
-import EventsPage, { loader as eventsLoader } from './pages/Events.tsx';
-import NewEventPage, { action as newEventAction } from './pages/NewEvent.tsx';
 import ErrorPage from './pages/Error.tsx';
+import RootLayout from './pages/Root.tsx';
+import HomePage from './pages/Home.tsx';
+import EventsRootLayout from './pages/EventsRoot.tsx';
+import EditEventPage from './pages/EditEvent.tsx';
+import NewEventPage from './pages/NewEvent.tsx';
+import EventsPage from './pages/Events.tsx';
+import EventDetailPage from './pages/EventDetail.tsx';
+
+import { loader as eventsLoader } from './pages/Events.tsx';
+import { action as deleteEventAction } from './pages/EventDetail.tsx';
+import { loader as eventDetailLoader } from './pages/EventDetail.tsx';
+import { action as formEventAction } from './util/eventFormAction.ts';
 
 const router = createBrowserRouter([
   {
@@ -41,10 +43,11 @@ const router = createBrowserRouter([
               {
                 path: 'edit',
                 element: <EditEventPage />,
+                action: formEventAction,
               },
             ],
           },
-          { path: 'new', element: <NewEventPage />, action: newEventAction },
+          { path: 'new', element: <NewEventPage />, action: formEventAction },
         ],
       },
     ],
