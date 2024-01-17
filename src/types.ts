@@ -1,7 +1,7 @@
 import { ActionFunction, Params } from 'react-router-dom';
 
 export interface EventTypes {
-  get(arg0: string): unknown;
+  get(arg0: string): string;
   title: string;
   image: string;
   date: string;
@@ -23,8 +23,9 @@ export interface EventDetailLoaderParams {
   params: Params<string>;
 }
 
-export type formEventActionFn = ActionFunction<formEventActionParams>;
-interface formEventActionParams {
+export type formEventActionFn = ActionFunction<ActionParams>;
+
+export interface ActionParams {
   request: {
     method: string;
     formData: () => Promise<EventTypes>;
@@ -38,6 +39,12 @@ export interface DeleteEventActionParams {
   };
   params: Params<string>;
 }
+
+export type newsletterActionFn = ActionFunction<{
+  request: {
+    formData: () => Promise<EventTypes>;
+  };
+}>;
 
 export interface deleteEventInputError {
   message: string;

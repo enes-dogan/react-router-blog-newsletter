@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
+import NewsletterSignup from './NewsletterSignup.tsx';
+
 export default function MainNavigation() {
   return (
     <header className="main-nav-header">
@@ -23,8 +25,17 @@ export default function MainNavigation() {
               Events
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/newsletter"
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              Newsletter
+            </NavLink>
+          </li>
         </ul>
       </nav>
+      <NewsletterSignup />
     </header>
   );
 }

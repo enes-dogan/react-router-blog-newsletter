@@ -8,12 +8,13 @@ import EditEventPage from './pages/EditEvent.tsx';
 import NewEventPage from './pages/NewEvent.tsx';
 import EventsPage from './pages/Events.tsx';
 import EventDetailPage from './pages/EventDetail.tsx';
+import NewsletterPage from './pages/Newsletter.tsx';
 
 import { loader as eventsLoader } from './pages/Events.tsx';
 import { action as deleteEventAction } from './pages/EventDetail.tsx';
 import { loader as eventDetailLoader } from './pages/EventDetail.tsx';
 import { action as formEventAction } from './util/eventFormAction.ts';
-
+import { action as newsletterAction } from './pages/Newsletter.tsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
           },
           { path: 'new', element: <NewEventPage />, action: formEventAction },
         ],
+      },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: newsletterAction,
       },
     ],
   },

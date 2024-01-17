@@ -6,6 +6,8 @@ import {
 } from 'react-router-dom';
 import { EventFormProps, deleteEventInputError } from '../types.ts';
 
+import PageContent from './PageContent.tsx';
+
 export default function EventForm({ method, event }: EventFormProps) {
   const navigate = useNavigate();
   const navigation = useNavigation();
@@ -20,13 +22,15 @@ export default function EventForm({ method, event }: EventFormProps) {
   return (
     <Form method={method} className="event-form-form">
       {response && response.errors && (
-        <ul>
-          {Object.values(response.errors).map((err: string) => (
-            <li key={err} className="error">
-              {err}
-            </li>
-          ))}
-        </ul>
+        <PageContent title={response.message}>
+          <ul>
+            {Object.values(response.errors).map((err: string) => (
+              <li key={err} className="error">
+                {err}
+              </li>
+            ))}
+          </ul>
+        </PageContent>
       )}
       <p>
         <label htmlFor="title">Title</label>
