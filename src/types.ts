@@ -50,3 +50,8 @@ export interface deleteEventInputError {
   message: string;
   errors: EventTypes;
 }
+
+export interface FetcherTypes {
+  data: { message: string };
+  state: 'idle' | 'loading' | 'submitting';
+}

@@ -10,7 +10,11 @@ import EventItem from '../components/EventItem.tsx';
 export default function EventDetailPage() {
   const data = useRouteLoaderData('event-detail') as { event: EventTypes };
 
-  return <EventItem event={data.event} />;
+  return (
+    <>
+      <EventItem event={data.event} />
+    </>
+  );
 }
 
 /* eslint-disable react-refresh/only-export-components */
