@@ -13,12 +13,11 @@ function NewsletterPage() {
 
 export default NewsletterPage;
 
-// eslint-disable-next-line react-refresh/only-export-components
+/* eslint-disable-next-line react-refresh/only-export-components */
 export const action: newsletterActionFn = async ({ request }) => {
   const data = await request.formData();
   const email = data.get('email');
 
-  // send to backend newsletter server ...
   console.log(email);
   return { message: 'Signup successful!' };
 };

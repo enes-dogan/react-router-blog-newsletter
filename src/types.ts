@@ -23,15 +23,13 @@ export interface EventDetailLoaderParams {
   params: Params<string>;
 }
 
-export type formEventActionFn = ActionFunction<ActionParams>;
-
-export interface ActionParams {
+export type formEventActionFn = ActionFunction<{
   request: {
     method: string;
     formData: () => Promise<EventTypes>;
   };
   params: Params<string>;
-}
+}>;
 
 export interface DeleteEventActionParams {
   request: {

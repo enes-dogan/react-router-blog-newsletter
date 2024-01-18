@@ -1,4 +1,12 @@
-import { useRouteLoaderData, json, redirect } from 'react-router-dom';
+import { Suspense } from 'react';
+import {
+  useRouteLoaderData,
+  json,
+  redirect,
+  defer,
+  Await,
+} from 'react-router-dom';
+
 import {
   EventTypes,
   EventDetailLoaderParams,
@@ -6,21 +14,31 @@ import {
 } from '../types.ts';
 
 import EventItem from '../components/EventItem.tsx';
+import EventsList from '../components/EventsList.tsx';
 
 export default function EventDetailPage() {
-  const data = useRouteLoaderData('event-detail') as { event: EventTypes };
+  const { event, events } = useRouteLoaderData('event-detail') as {
+    event: EventTypes;
+    events: EventTypes[];
+  };
 
   return (
     <>
-      <EventItem event={data.event} />
+      <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
+        <Await resolve={event}>
+          {(loadedEvent: EventTypes) => <EventItem event={loadedEvent} />}
+        </Await>
+      </Suspense>
+      <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
+        <Await resolve={events}>
+          {(loadedEvents: EventTypes[]) => <EventsList events={loadedEvents} />}
+        </Await>
+      </Suspense>
     </>
   );
 }
 
-/* eslint-disable react-refresh/only-export-components */
-export async function loader({ params }: EventDetailLoaderParams) {
-  const id = params.eventId!;
-
+async function loadEvent(id: string) {
   const response = await fetch(`http://localhost:8080/events/${id}`);
 
   if (!response.ok) {
@@ -29,8 +47,36 @@ export async function loader({ params }: EventDetailLoaderParams) {
       { status: 500 }
     );
   } else {
-    return response;
+    const resData = (await response.json()) as { event: EventTypes };
+    return resData.event;
   }
+}
+
+async function loadEvents() {
+  const response = await fetch('http://localhost:8080/events');
+
+  if (!response.ok) {
+    throw json(
+      { message: 'Could not load events.' },
+      {
+        status: 500,
+      }
+    );
+  } else {
+    const resData = (await response.json()) as { events: EventTypes[] };
+    return resData.events;
+  }
+}
+
+/* eslint-disable react-refresh/only-export-components */
+export async function loader({ params }: EventDetailLoaderParams) {
+  const id = params.eventId!;
+
+  return defer({
+    // component that will use event (<EventTypes/>) will wait rendering untill promise resolve with
+    event: await loadEvent(id), // if we use await front of the loader function page will wait (default behavior)
+    events: loadEvents(),
+  });
 }
 
 export async function action({ request, params }: DeleteEventActionParams) {

@@ -32,7 +32,7 @@ async function loadEvents() {
   }
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
+/* eslint-disable-next-line react-refresh/only-export-components */
 export function loader() {
   return defer({
     events: loadEvents(),

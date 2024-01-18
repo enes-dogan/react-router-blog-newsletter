@@ -1,5 +1,4 @@
 import { Link, useSubmit } from 'react-router-dom';
-
 import { EventTypes } from '../types.ts';
 
 export default function EventItem({ event }: { event: EventTypes }) {
