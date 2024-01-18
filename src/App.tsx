@@ -15,6 +15,7 @@ import { action as deleteEventAction } from './pages/EventDetail.tsx';
 import { loader as eventDetailLoader } from './pages/EventDetail.tsx';
 import { action as formEventAction } from './util/eventFormAction.ts';
 import { action as newsletterAction } from './pages/Newsletter.tsx';
+
 const router = createBrowserRouter([
   {
     path: '/',
